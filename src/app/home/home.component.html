@@ -1,0 +1,22 @@
+<mat-toolbar class="toolbar">
+  <mat-toolbar-row>
+    <button (click)="sidebar.toggle()" mat-icon-button>
+      <mat-icon style="color: white;">menu</mat-icon>
+    </button>
+    <span style="color: white;">Portfolio admin</span>
+    <span class="spacer"></span>
+    <button mat-icon-button aria-label="logout-icon" style="color: white;" (click)="navigateSignIn()">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container style="height: 91vh; background-color: white">
+  <mat-drawer mode="side" #sidebar opened style="min-width: 15%;">
+    <mat-nav-list>
+      <a [routerLink]="menu.routeLink" mat-list-item *ngFor="let menu of menuDetails" style="font-weight: 500;">{{menu.name}}</a>
+    </mat-nav-list>
+  </mat-drawer>
+  <div style="background-color: transparent;color:black !important;flex-grow: 1;">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
