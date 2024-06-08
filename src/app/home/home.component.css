@@ -4,3 +4,13 @@
 .toolbar{
   background-color: var(--primary-color);
 }
+.active-link {
+  color: white;
+}
+.text-change{
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.text-change::after{
+  content: "🌵";
+}

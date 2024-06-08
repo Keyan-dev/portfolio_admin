@@ -1,23 +1,21 @@
 import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SkillsRoutingModule } from './skills-routing.module';
-import { SkillsComponent } from './skills/skills.component';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TechnologyListComponent } from './technology-list/technology-list.component';
+import { TechnologyRoutingModule } from './technology-routing.module';
 import { CommonHeaderComponent } from '../common-header/common-header.component';
 
-
-
 @NgModule({
-  declarations: [
-    SkillsComponent
-  ],
-  imports: [
-    CommonModule,
-    SkillsRoutingModule, MaterialModule, FlexLayoutModule, ReactiveFormsModule, HttpClientModule, CommonHeaderComponent
-  ]
+    declarations: [
+        TechnologyListComponent
+    ],
+    imports: [
+        CommonModule,
+        TechnologyRoutingModule, MaterialModule, FlexLayoutModule, ReactiveFormsModule, HttpClientModule, CommonHeaderComponent
+    ]
 })
-export class SkillsModule { }
+export class TechnologyModule { }
 

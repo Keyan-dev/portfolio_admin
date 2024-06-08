@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   constructor(private router: Router) {
 
   }
@@ -14,13 +14,17 @@ export class HomeComponent {
     name: 'Dashboard',
     routeLink: '/app/dashboard'
   }, {
-    name: 'Hero',
-    routeLink: '/app/hero'
-  }, {
-    name: 'skills',
+    name: 'Skill Group',
     routeLink: '/app/skills'
+  },
+  {
+    name: 'Technology',
+    routeLink: '/app/technology'
   }];
   navigateSignIn() {
     this.router.navigate(['signin']);
+  }
+  ngOnInit(): void {
+
   }
 }

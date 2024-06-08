@@ -4,6 +4,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
+import { CommonHeaderComponent } from '../common-header/common-header.component';
 
 
 
@@ -13,7 +14,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    FlexLayoutModule, MaterialModule
-  ]
+    FlexLayoutModule, MaterialModule, CommonHeaderComponent
+  ],
+  providers: []
 })
 export class DashboardModule { }

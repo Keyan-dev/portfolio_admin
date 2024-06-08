@@ -1,0 +1,9 @@
+  <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-bottom: 2%;">
+    <div>
+      <div fxLayoutAlign="start center" style="font-size:20px"><h3 style="margin: 0;">{{headerDetails.heading || 'No Heading'}}&nbsp;</h3><mat-icon>{{headerDetails.iconName}}</mat-icon></div>
+      <h6 style="margin: 0;">{{headerDetails.subHeading || 'No sub heading'}}</h6>
+    </div>
+    <button mat-raised-button class="primary-button" (click)="buttonClicked()">
+      {{headerDetails.buttonName || 'No button'}}
+    </button>
+  </div>

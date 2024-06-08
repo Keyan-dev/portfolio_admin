@@ -1,51 +1,114 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { headerModel } from 'src/app/model/common-model';
+import { HttpService } from 'src/app/services/http.service';
+import { SkillsService } from '../services/skills.service';
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+  styleUrls: ['./skills.component.css'],
+  providers: [{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }]
 })
 export class SkillsComponent implements OnInit {
-  skillGroupForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
-    this.skillGroupForm = this.formBuilder.group({
-      skills: this.formBuilder.array([this.createSkillGroup()])
+  displayedColumns: String[] = ['index', 'imageUrl', 'name', 'description', 'Actions'];
+  listDataSource: any;
+  skillGroupForm!: FormGroup;
+  isEdit: boolean = false;
+  editDetails: any = {};
+  userId = '665db6f0aff325435c95713e';
+  skillGroupHeader: headerModel = {
+    heading: 'Skill Group',
+    subHeading: 'Yours skill group will displayed here',
+    buttonName: "Add Skill Group",
+    buttonFunction: 'addSkillGroups',
+    iconName: 'build'
+  }
+  @ViewChild('addSkillGroupTemplate', { static: true }) addSkillGroupTemplate!: TemplateRef<any>;
+  constructor(
+    private skillsService: SkillsService, private _snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {
+    this.skillGroupForm = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      imageUrl: new FormControl(null),
+      description: new FormControl(null)
     })
   }
   ngOnInit(): void {
-    console.log(this.skillGroupForm);
+    this.getSkillGroups();
   }
-  createSkillGroup(): FormGroup {
-    return this.formBuilder.group({
-      skillGroupName: [''],
-      skill: this.formBuilder.array([this.createSkill()])
-    });
+  getSkillGroups() {
+    this.skillsService.getAllSkillGroups({}).subscribe((data: any) => {
+      console.log(data);
+      this.listDataSource = new MatTableDataSource(this.processData(data));
+    }, (err: any) => {
+      this._snackBar.open("Failed to get skill group Details.Error Message:" + err.message, 'close');
+      console.log("error while getting skillGroup");
+    })
   }
-  createSkill(): FormGroup {
-    return this.formBuilder.group({
-      name: [''],
-      imageDir: [''],
-      description: ['']
-    });
+  addSkillGroups() {
+    this.dialog.open(this.addSkillGroupTemplate, { disableClose: true, width: '600px' });
   }
-  get getSkillGroupArray(): FormArray {
-    return this.skillGroupForm.get('skills') as FormArray;
+  saveSkillGroup() {
+    console.log(this.skillGroupForm.value);
+    let payload = this.skillGroupForm.value;
+    payload['userId'] = this.userId;
+    if (!this.isEdit) {
+      this.skillsService.createSkillGroup({ params: {}, bodyData: payload }).subscribe(() => {
+        this._snackBar.open("Successfully saved!", 'X');
+        this.closeDialog();
+        this.getSkillGroups();
+      }, (err: Error) => {
+        this._snackBar.open("Failed to save!Error Message:" + err.message, 'X');
+      })
+    }
+    else {
+      payload = this.skillGroupForm.value;
+      payload['userId'] = this.userId;
+      payload['_id'] = this.editDetails?._id;
+      this.skillsService.updateSkillGroup({ params: {}, bodyData: payload }).subscribe(() => {
+        this._snackBar.open("Successfully updated.", 'X');
+        this.closeDialog();
+        this.getSkillGroups();
+      }, (err: Error) => {
+        this._snackBar.open("Failed to update!Error Message:" + err.message, 'X');
+      })
+
+      this.closeDialog();
+    }
   }
-  getSkills(skillGroupIndex: number): FormArray {
-    return this.getSkillGroupArray.at(skillGroupIndex).get('skill') as FormArray;
+  processData(data: any) {
+    data = data.map((e: any, index: number) => { return { _id: e._id, index: index + 1, name: e.name ?? 'N/A', imageUrl: e.imageUrl ?? 'N/A', description: e.description ?? 'N/A', Actions: true } })
+    return data;
   }
-  addSkillGroup() {
-    (this.skillGroupForm.get('skills') as FormArray).controls.push(this.createSkillGroup());
+  editSkillGroup(data: any) {
+    this.editDetails = data;
+    this.skillGroupForm.get('name')?.setValue(data?.name);
+    this.skillGroupForm.get('description')?.setValue(data?.description);
+    this.skillGroupForm.get('imageUrl')?.setValue(data?.imageUrl);
+    this.isEdit = true;
+    this.addSkillGroups();
   }
-  addSkill(skillGroupIndex: number) {
-    (this.getSkillGroupArray.at(skillGroupIndex).get('skill') as FormArray).controls.push(this.createSkill());
+  deleteSkillGroup(_id: any) {
+    this.skillsService.deleteSkillGroup({ params: {}, queryParams: { _id: _id } }).subscribe((data: any) => {
+      this._snackBar.open("Successfully deleted!", 'X');
+      this.getSkillGroups();
+    }, (err: Error) => {
+      this._snackBar.open("Failed to delete!Error Message:" + err.message, 'X');
+    })
   }
-  removeSkillGroup(skillGroupFormIndex: number) {
-    (this.getSkillGroupArray as FormArray).removeAt(skillGroupFormIndex);
+  closeDialog() {
+    this.isEdit = false;
+    this.editDetails = {};
+    this.skillGroupForm.reset();
+    this.dialog.closeAll();
   }
-  removeSkill(skillGroupIndex: number, skillIndex: number) {
-    console.log(skillGroupIndex, skillIndex);
-    (this.getSkillGroupArray.at(skillGroupIndex).get('skill') as FormArray).removeAt(skillIndex);
-  }
+  eventHandle(event: any) {
+    console.log("Event...emitted...", event);
+    (this as any)[event]();
+  };
 }

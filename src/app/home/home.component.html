@@ -13,7 +13,7 @@
 <mat-drawer-container style="height: 91vh; background-color: white">
   <mat-drawer mode="side" #sidebar opened style="min-width: 15%;">
     <mat-nav-list>
-      <a [routerLink]="menu.routeLink" mat-list-item *ngFor="let menu of menuDetails" style="font-weight: 500;">{{menu.name}}</a>
+      <a [routerLink]="menu.routeLink" mat-list-item routerLinkActive="active-link" *ngFor="let menu of menuDetails" style="font-weight: 500;"><p routerLinkActive="text-change">{{menu.name}}</p></a>
     </mat-nav-list>
   </mat-drawer>
   <div style="background-color: transparent;color:black !important;flex-grow: 1;">
