@@ -1,3 +1,4 @@
+<app-common-loader *ngIf="pageProperties.isLoading"></app-common-loader>
 <div class="container">
   <app-common-header [headerDetails]="skillGroupHeader" (ButtonClickEvent)="eventHandle($event)"></app-common-header>
   <div class="mat-elevation-z8">
@@ -78,9 +79,10 @@
     <div fxLayout="row" fxLayoutAlign="center center">
       <button
         mat-raised-button
-        class="primary-button" (click)="saveSkillGroup()" [disabled]="!skillGroupForm.valid"
+        class="primary-button" (click)="saveSkillGroup()" [disabled]="!skillGroupForm.valid || pageProperties.buttonLoading"
       >
-        {{isEdit?'Update':'Save'}}
+    <mat-spinner *ngIf="pageProperties.buttonLoading" style="width: 20px;"></mat-spinner>
+        <span *ngIf="!pageProperties.buttonLoading" >{{isEdit?'Update':'Save'}}</span>
       </button>
     </div>
   </div>

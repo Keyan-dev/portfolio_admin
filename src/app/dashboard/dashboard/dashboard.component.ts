@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonAuthService } from 'src/app/services/common-auth.service';
+import { CommonSnackbarService } from 'src/app/services/common-snackbar.service';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -6,9 +8,12 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
-  constructor(private httpService: HttpService) {
-    httpService.replaceQueryandParams('hello/{myParams}/route', { myParams: 124231231321, myParams2: 'werewr' }, { test: 1, test2: 2 },);
+export class DashboardComponent implements OnInit {
+  constructor(private httpService: HttpService,
+    private snackbar: CommonSnackbarService,
+    private authService: CommonAuthService
+  ) {
+
   }
   dashboardDetails = [{
     title: 'Projects'
@@ -19,4 +24,9 @@ export class DashboardComponent {
   }, {
     title: 'code labs'
   }]
+  ngOnInit() {
+    // this.authService.userDetails.subscribe(data => {
+    //   console.log("userData...", data);
+    // })
+  }
 }

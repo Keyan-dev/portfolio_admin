@@ -7,15 +7,14 @@ import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './home/home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthModule } from './auth/auth.module';
-import { CommonHeaderComponent } from './common-header/common-header.component';
-import { CommonTableComponent } from './common-table/common-table.component';
+import { CommonHeaderComponent } from './common-standlone/common-header/common-header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonLoaderComponent } from './common-standlone/common-loader/common-loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CommonTableComponent,
   ],
   imports: [
     CommonHeaderComponent,
@@ -25,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FlexLayoutModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonLoaderComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

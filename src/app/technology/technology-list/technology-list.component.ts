@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { headerModel } from 'src/app/model/common-model';
+import { TechnologyService } from '../services/technology.service';
 
 @Component({
   selector: 'app-technology-list',
@@ -12,6 +13,7 @@ import { headerModel } from 'src/app/model/common-model';
   styleUrls: ['./technology-list.component.css']
 })
 export class TechnologyListComponent implements OnInit {
+  isLoading = false;
   displayedColumns: String[] = ['index', 'name', 'colorCode', 'preview', 'Actions'];
   listDataSource: any;
   technologyGroupForm!: FormGroup;
@@ -28,7 +30,8 @@ export class TechnologyListComponent implements OnInit {
   @ViewChild('addtechnologyGroupTemplate', { static: true }) addtechnologyGroupTemplate!: TemplateRef<any>;
   constructor(
     private http: HttpClient, private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private technologyService: TechnologyService,
   ) {
     this.technologyGroupForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
@@ -39,10 +42,13 @@ export class TechnologyListComponent implements OnInit {
     this.gettechnologyGroups();
   }
   gettechnologyGroups() {
-    this.http.get('http://localhost:3000/technology').subscribe((data) => {
+    this.isLoading = true;
+    this.technologyService.getAllTechnologies({ params: {}, queryParams: {} }).subscribe((data: any) => {
       console.log(data);
       this.listDataSource = new MatTableDataSource(this.processData(data));
-    }, err => {
+      this.isLoading = false;
+    }, (err: Error) => {
+      this.isLoading = false;
       this._snackBar.open("Failed to get technology group Details.Error Message:" + err.message, 'close');
       console.log("error while getting technologyGroup");
     })
@@ -54,22 +60,22 @@ export class TechnologyListComponent implements OnInit {
     console.log(this.technologyGroupForm.value);
     let payload = this.technologyGroupForm.value;
     if (!this.isEdit) {
-      this.http.post('http://localhost:3000/technology', this.technologyGroupForm.value).subscribe((data) => {
+      this.technologyService.createTechnology(({ params: {}, queryParams: {}, bodyData: payload })).subscribe((data: any) => {
         this._snackBar.open("Successfully saved!", 'X');
         this.closeDialog();
         this.gettechnologyGroups();
-      }, (err) => {
+      }, (err: Error) => {
         this._snackBar.open("Failed to save!Error Message:" + err.message, 'X');
       })
     }
     else {
       payload = this.technologyGroupForm.value;
       payload['_id'] = this.editDetails?._id;
-      this.http.put('http://localhost:3000/technology', this.technologyGroupForm.value).subscribe((data) => {
+      this.technologyService.updateTechnology(({ params: {}, queryParams: {}, bodyData: payload })).subscribe((data: any) => {
         this._snackBar.open("Successfully updated.", 'X');
         this.closeDialog();
         this.gettechnologyGroups();
-      }, (err) => {
+      }, (err: Error) => {
         this._snackBar.open("Failed to update!Error Message:" + err.message, 'X');
       })
 
@@ -89,10 +95,10 @@ export class TechnologyListComponent implements OnInit {
     this.addtechnologyGroups();
   }
   deletetechnologyGroup(_id: any) {
-    this.http.delete(`http://localhost:3000/technology?_id=${_id}`).subscribe((data) => {
+    this.technologyService.deleteTechnology(({ params: {}, queryParams: { _id: _id } })).subscribe((data: any) => {
       this._snackBar.open("Successfully deleted!", 'X');
       this.gettechnologyGroups();
-    }, err => {
+    }, (err: Error) => {
       this._snackBar.open("Failed to delete!Error Message:" + err.message, 'X');
     })
   }

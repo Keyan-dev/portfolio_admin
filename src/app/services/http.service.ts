@@ -14,28 +14,28 @@ export class HttpService {
   */
   get<T>(apiUrl: string, params: any, queryParams: any,): Observable<T> {
     apiUrl = this.replaceQueryandParams(environment.apiKey + apiUrl, params, queryParams);
-    return this.http.get<T>(apiUrl);
+    return this.http.get<T>(apiUrl, { withCredentials: true });
   }
   /*
   Function which is used to post method 
   */
   post<T>(apiUrl: string, params: any, bodyData: any): Observable<T> {
     apiUrl = this.replaceQueryandParams(apiUrl, params, {});
-    return this.http.post<T>(environment.apiKey + apiUrl, bodyData);
+    return this.http.post<T>(environment.apiKey + apiUrl, bodyData, { withCredentials: true });
   }
   /*
   Function which is used to put method 
   */
   put<T>(apiUrl: string, params: any, bodyData: any): Observable<T> {
     apiUrl = this.replaceQueryandParams(environment.apiKey + apiUrl, params, {});
-    return this.http.put<T>(apiUrl, bodyData);
+    return this.http.put<T>(apiUrl, bodyData, { withCredentials: true });
   }
   /*
   Function which is used to delete method 
   */
   delete<T>(apiUrl: string, params: any, queryParams: any,): Observable<T> {
     apiUrl = this.replaceQueryandParams(environment.apiKey + apiUrl, params, queryParams);
-    return this.http.delete<T>(apiUrl)
+    return this.http.delete<T>(apiUrl, { withCredentials: true })
   }
   /*
   Function which is used to replace params and query content

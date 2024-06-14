@@ -1,3 +1,5 @@
+<app-common-loader *ngIf="pageProperties.isLoader"></app-common-loader>
+<div *ngIf="!pageProperties.isLoader">
 <mat-toolbar class="toolbar">
   <mat-toolbar-row>
     <button (click)="sidebar.toggle()" mat-icon-button>
@@ -5,18 +7,36 @@
     </button>
     <span style="color: white;">Portfolio admin</span>
     <span class="spacer"></span>
-    <button mat-icon-button aria-label="logout-icon" style="color: white;" (click)="navigateSignIn()">
-      <mat-icon>power_settings_new</mat-icon>
-    </button>
+    <div [matMenuTriggerFor]="menu" class="profile-menu">
+        <mat-icon>account_circle</mat-icon>
+        <p>{{pageProperties.userName}}</p>
+        <mat-icon>arrow_drop_down</mat-icon>
+        <mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>General details</span>
+  </button>
+    <button mat-menu-item>
+    <mat-icon>description</mat-icon>
+    <span>Resume</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>
+      </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-drawer-container style="height: 91vh; background-color: white">
   <mat-drawer mode="side" #sidebar opened style="min-width: 15%;">
     <mat-nav-list>
-      <a [routerLink]="menu.routeLink" mat-list-item routerLinkActive="active-link" *ngFor="let menu of menuDetails" style="font-weight: 500;"><p routerLinkActive="text-change">{{menu.name}}</p></a>
+      <ng-container *ngIf="pageProperties.menuDetails?.length"><a [routerLink]="menu.routeLink" mat-list-item routerLinkActive="active-link" *ngFor="let menu of pageProperties.menuDetails" style="font-weight: 500;"><p routerLinkActive="text-change">{{menu.name}}</p></a></ng-container>
     </mat-nav-list>
   </mat-drawer>
   <div style="background-color: transparent;color:black !important;flex-grow: 1;">
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>
+</div>
+

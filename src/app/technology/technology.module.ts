@@ -6,7 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TechnologyListComponent } from './technology-list/technology-list.component';
 import { TechnologyRoutingModule } from './technology-routing.module';
-import { CommonHeaderComponent } from '../common-header/common-header.component';
+import { CommonHeaderComponent } from '../common-standlone/common-header/common-header.component';
+import { CommonLoaderComponent } from '../common-standlone/common-loader/common-loader.component';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,13 @@ import { CommonHeaderComponent } from '../common-header/common-header.component'
     ],
     imports: [
         CommonModule,
-        TechnologyRoutingModule, MaterialModule, FlexLayoutModule, ReactiveFormsModule, HttpClientModule, CommonHeaderComponent
+        TechnologyRoutingModule,
+        MaterialModule,
+        FlexLayoutModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        CommonHeaderComponent,
+        CommonLoaderComponent
     ]
 })
 export class TechnologyModule { }

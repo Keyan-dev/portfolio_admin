@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '../../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({

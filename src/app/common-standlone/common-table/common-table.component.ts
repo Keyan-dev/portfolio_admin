@@ -3,7 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-common-table',
   templateUrl: './common-table.component.html',
-  styleUrls: ['./common-table.component.css']
+  styleUrls: ['./common-table.component.css'],
+  standalone: true
 })
 export class CommonTableComponent implements OnInit {
   @Input() definedColums!: string[];

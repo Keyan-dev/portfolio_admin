@@ -24,3 +24,61 @@ body { margin: 0; font-family: 'Nunito', sans-serif;}
 ::ng-deep .mat-mdc-text-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: transparent !important;
 }
+.failed_snack_bar{
+    font-size: 14px;
+    --mdc-snackbar-container-color:rgb(139, 0, 0);
+    --mdc-snackbar-supporting-text-color:white;
+   
+}
+.failed_snack_bar button{
+    background-color: white;
+    color:white !important;
+    width: 10px;
+    background:transparent;
+    border: 1px solid white;
+}
+.success_snack_bar{
+    font-size: 14px;
+    --mdc-snackbar-container-color:rgb(0, 172, 92);
+    --mdc-snackbar-supporting-text-color:white;
+   
+}
+.success_snack_bar button{
+    background-color: white;
+    color:white !important;
+    width: 10px;
+    background:transparent;
+    border: 1px solid white;
+}
+.alert_snack_bar{
+    font-size: 14px;
+    --mdc-snackbar-container-color:rgb(214, 175, 0);
+    --mdc-snackbar-supporting-text-color:white;
+   
+}
+.alert_snack_bar button{
+    background-color: white;
+    color:white !important;
+    width: 10px;
+    background:transparent;
+    border: 1px solid white;
+}
+.info_snack_bar{
+    font-size: 14px;
+    --mdc-snackbar-container-color:rgb(57, 100, 240);
+    --mdc-snackbar-supporting-text-color:white;
+   
+}
+.info_snack_bar button{
+    background-color: white;
+    color:white !important;
+    width: 10px;
+    background:transparent;
+    border: 1px solid white;
+}
+.disable-button{
+    background-color: grey;
+    color: white;
+    pointer-events: none;
+    cursor:none;
+}
