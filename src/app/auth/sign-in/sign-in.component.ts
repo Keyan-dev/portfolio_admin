@@ -33,6 +33,7 @@ export class SignInComponent implements OnInit {
         this.loginUser(data);
       },
       error: (err) => {
+        console.log(err);
         this.snackBar.openCustomSnackBar(err.error.error, 'close', 'failed', 2000, 'center', 'bottom');
         this.pageProperties.buttonLoader = false;
       },
@@ -53,26 +54,4 @@ export class SignInComponent implements OnInit {
     this.authService.userDetails.next(userData);
     return true;
   }
-  // async getTokenUserDetails() {
-  //   let userToken = ɵparseCookieValue(document.cookie, '__pa_token');
-  //   console.log("userToken...", userToken)
-  //   if (userToken) {
-  //     this.authService.getUserDetails(userToken).subscribe({
-  //       next: (data) => {
-  //         this.pageProperties.isLoader = false;
-  //         this.loginUser(data);
-  //       },
-  //       error: () => {
-  //         this.pageProperties.isLoader = false;
-  //         this.snackBar.openCustomSnackBar('Failed to get login user details', 'close', 'failed', 2000, 'center', 'bottom');
-  //       }
-  //     });
-  //     return true;
-  //   }
-  //   else {
-  //     this.pageProperties.isLoader = false;
-  //     return true;
-  //   }
-
-  // }
 }
