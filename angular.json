@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "portfolio-admin:build:production"
+              "buildTarget": "portfolio-admin:build:production"
             },
             "development": {
-              "browserTarget": "portfolio-admin:build:development"
+              "buildTarget": "portfolio-admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "portfolio-admin:build"
+            "buildTarget": "portfolio-admin:build"
           }
         },
         "test": {
