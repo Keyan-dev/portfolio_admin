@@ -5,20 +5,15 @@ import { SkillsComponent } from './skills/skills.component';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CommonHeaderComponent } from '../common-standlone/common-header/common-header.component';
 import { CommonLoaderComponent } from '../common-standlone/common-loader/common-loader.component';
 
 
 
-@NgModule({
-  declarations: [
-    SkillsComponent
-  ],
-  imports: [
-    CommonModule,
-    SkillsRoutingModule, MaterialModule, FlexLayoutModule, ReactiveFormsModule, HttpClientModule, CommonHeaderComponent, CommonLoaderComponent
-  ]
-})
+@NgModule({ declarations: [
+        SkillsComponent
+    ], imports: [CommonModule,
+        SkillsRoutingModule, MaterialModule, FlexLayoutModule, ReactiveFormsModule, CommonHeaderComponent, CommonLoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class SkillsModule { }
 

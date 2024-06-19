@@ -8,26 +8,19 @@ import { HomeComponent } from './home/home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthModule } from './auth/auth.module';
 import { CommonHeaderComponent } from './common-standlone/common-header/common-header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CommonLoaderComponent } from './common-standlone/common-loader/common-loader.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-  ],
-  imports: [
-    CommonHeaderComponent,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    AuthModule,
-    HttpClientModule,
-    CommonLoaderComponent
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+    ],
+    bootstrap: [AppComponent], imports: [CommonHeaderComponent,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        FlexLayoutModule,
+        AuthModule,
+        CommonLoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
