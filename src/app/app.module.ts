@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { CommonHeaderComponent } from './common-standlone/common-header/common-header.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CommonLoaderComponent } from './common-standlone/common-loader/common-loader.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -22,5 +23,5 @@ import { CommonLoaderComponent } from './common-standlone/common-loader/common-l
         MaterialModule,
         FlexLayoutModule,
         AuthModule,
-        CommonLoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        CommonLoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()] })
 export class AppModule { }

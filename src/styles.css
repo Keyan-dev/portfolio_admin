@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%;overflow: hidden; }
-body { margin: 0; font-family: 'Nunito', sans-serif;}
+body { margin: 0;}
 :root{
-    --primary-color:#1abc9c;
+    --primary-color:#00419c;
     --secondary-color: #424242;
     --warn-color:rgb(197, 0, 0);
 }
@@ -14,7 +14,7 @@ body { margin: 0; font-family: 'Nunito', sans-serif;}
     color: var(--warn-color);
 }
 .primary-button{
-    background-color: #1abc9c !important;
+    background-color: var(--primary-color) !important;
     color: white !important;
 }
 .secondary-button{
@@ -28,7 +28,7 @@ body { margin: 0; font-family: 'Nunito', sans-serif;}
     font-size: 14px;
     --mdc-snackbar-container-color:rgb(139, 0, 0);
     --mdc-snackbar-supporting-text-color:white;
-   
+    padding: 20px;
 }
 .failed_snack_bar button{
     background-color: white;
@@ -82,3 +82,5 @@ body { margin: 0; font-family: 'Nunito', sans-serif;}
     pointer-events: none;
     cursor:none;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

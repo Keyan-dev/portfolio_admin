@@ -4,8 +4,10 @@
 }
 .sign-in-card {
   width: 100%;
-  max-width: 350px;
-  padding: 20px;
+  max-width: 320px;
+  padding:1%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 .sign-in-header {
@@ -20,9 +22,9 @@
   text-align: center;
 }
 .sign-in-icon{
-    font-size: 70px;
-    width: 70px;
-    height: 70px;
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
   color: var(--primary-color);
 }
 .sign-in-content{
@@ -34,5 +36,7 @@
 
 }
 .sign-in-button{
-  width: 200px;
+  width: 150px;
+  font-size: 14px;
+  cursor: pointer !important;
 }
