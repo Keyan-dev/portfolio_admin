@@ -1,5 +1,5 @@
 <app-common-loader *ngIf="isLoading"></app-common-loader>
-<div class="container">
+<!-- <div class="container">
   <app-common-header [headerDetails]="TechnologyGroupHeader" (ButtonClickEvent)="eventHandle($event)"></app-common-header>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="listDataSource">
@@ -30,21 +30,40 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-</div>
+</div> -->
 
+<div class="container">
+  <app-common-header [headerDetails]="TechnologyGroupHeader" (ButtonClickEvent)="eventHandle($event)"></app-common-header>
+  <div class="flex-container" [ngStyle.lt-lg]="{'align-items':'center','justify-content':'center'}">
+    @for(techData of technologyData;track techData.id){
+    <div class="technology-card" [ngStyle.xs]="{'width':'100%'}" [ngStyle.lt-lg]="{'width':'40%'}">
+      <div class="header">
+      <p class="header-text">{{techData.name}}</p>
+      <div>
+      <button (click)="edittechnologyGroup(techData)" class="icon-button"><mat-icon>edit</mat-icon></button>
+      <button (click)="deletetechnologyGroup(techData._id)" class="icon-button"><mat-icon class="delete_icon">delete</mat-icon></button>
+    </div>
+
+    </div>
+    <div class="row-content"><p>Hex color code:&nbsp;</p><p>{{techData.colorCode}}</p></div>
+    <div class="row-content"><p>Preview:&nbsp;</p><div [style.background]="techData.colorCode" role="listitem" class="chip"><span style="color:white;font-size:13px">{{ techData.name }}</span></div></div>
+    </div>
+  }
+  </div>
+</div>
 <ng-template #addtechnologyGroupTemplate>
   <form [formGroup]="technologyGroupForm">
   <div style="padding: 5%;padding-top: 1%;" fxLayout="column" fxLayoutGap="3%">
     <div class="header" fxLayoutAlign="space-between center" style="">
-      <h3>{{isEdit?'Edit':'Add'}} Technology</h3>
-      <mat-icon style="color:red;cursor: pointer;" (click)="closeDialog()">close</mat-icon>
+      <p class="header-text">{{isEdit?'Edit':'Add'}} Technology</p>
+      <mat-icon style="color:red;cursor: pointer;font-size: 16px;height: 18px;width: 16px;" (click)="closeDialog()">close</mat-icon>
     </div>
     <div
       fxLayout="column"
       fxLayoutAlign="center center"
-      style="width: 100%"
+      style="width: 100%;font-size: 13px;"
     >
-      <mat-form-field appearance="outline" style="width: 100%">
+      <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Technology name</mat-label>
         <input
           matInput

@@ -20,6 +20,7 @@ export class TechnologyListComponent implements OnInit {
   isEdit: boolean = false;
   editDetails: any = {};
   userId = '665db6f0aff325435c95713e';
+  technologyData:any;
   TechnologyGroupHeader: headerModel = {
     heading: 'Technology',
     subHeading: 'Yours Technologies will displayed here',
@@ -45,6 +46,7 @@ export class TechnologyListComponent implements OnInit {
     this.isLoading = true;
     this.technologyService.getAllTechnologies({ params: {}, queryParams: {} }).subscribe((data: any) => {
       console.log(data);
+      this.technologyData=data;
       this.listDataSource = new MatTableDataSource(this.processData(data));
       this.isLoading = false;
     }, (err: Error) => {
@@ -54,7 +56,7 @@ export class TechnologyListComponent implements OnInit {
     })
   }
   addtechnologyGroups() {
-    this.dialog.open(this.addtechnologyGroupTemplate, { disableClose: true, width: '600px' });
+    this.dialog.open(this.addtechnologyGroupTemplate, { disableClose: true,width:'300px'});
   }
   savetechnologyGroup() {
     console.log(this.technologyGroupForm.value);

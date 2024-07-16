@@ -11,6 +11,7 @@ import { CommonHeaderComponent } from './common-standlone/common-header/common-h
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CommonLoaderComponent } from './common-standlone/common-loader/common-loader.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CommonListCardComponent } from './common-list-card/common-list-card.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -23,5 +24,5 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         MaterialModule,
         FlexLayoutModule,
         AuthModule,
-        CommonLoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()] })
+        CommonLoaderComponent,CommonListCardComponent], providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()] })
 export class AppModule { }

@@ -1,10 +1,13 @@
-<app-common-loader *ngIf="pageProperties.isLoader"></app-common-loader>
-<div *ngIf="!pageProperties.isLoader" class="sign-in-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2%">
+@if(pageProperties.isLoader){
+  <app-common-loader></app-common-loader>
+}
+@else{
+<div class="sign-in-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2%">
   <form [formGroup]="signInForm">
   <mat-card class="sign-in-card">
     <div fxLayout="row" fxLayoutAlign="center center"><mat-icon class="sign-in-icon">supervised_user_circle</mat-icon></div>
     <mat-card-header class="sign-in-header">
-      <mat-card-title class="sign-in-title">Portfolio Admin</mat-card-title>
+      <mat-card-title class="sign-in-title">Sign in to continue</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="sign-in-content">
@@ -22,10 +25,15 @@
     </mat-card-content>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
       <button mat-raised-button class="primary-button sign-in-button" type="button" (click)="login()" [disabled]="!signInForm.valid">
-        <mat-spinner *ngIf="pageProperties?.buttonLoader" style="width: 20px !important;"></mat-spinner>
-        <span *ngIf="!pageProperties?.buttonLoader">SIGN IN</span>
+       @if(pageProperties.buttonLoader){
+        <mat-spinner class="button-spinner"></mat-spinner>
+       }
+       @else{
+        <span>SIGN IN</span>
+       } 
       </button>
     </mat-card-actions>
   </mat-card>
   </form>
 </div>
+}

@@ -81,7 +81,7 @@
         mat-raised-button
         class="primary-button" (click)="saveSkillGroup()" [disabled]="!skillGroupForm.valid || pageProperties.buttonLoading"
       >
-    <mat-spinner *ngIf="pageProperties.buttonLoading" style="width: 20px;"></mat-spinner>
+    <mat-spinner *ngIf="pageProperties.buttonLoading" style="width: 20px;" class="button-spinner"></mat-spinner>
         <span *ngIf="!pageProperties.buttonLoading" >{{isEdit?'Update':'Save'}}</span>
       </button>
     </div>

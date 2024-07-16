@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
   ngOnInit() {
     console.log("app component called...");
-    this.pageProperties.isLoading = true;
-    this.navigateToHome().then(() => {
-      this.pageProperties.isLoading = false;
-    })
+    // this.pageProperties.isLoading = true;
+    // this.navigateToHome().then(() => {
+    //   this.pageProperties.isLoading = false;
+    // })
   }
   async navigateToHome() {
     let userToken = ɵparseCookieValue(document.cookie, '__pa_token');

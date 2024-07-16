@@ -5,7 +5,7 @@
     <button (click)="sidebar.toggle()" mat-icon-button>
       <mat-icon style="color: white;">menu</mat-icon>
     </button>
-    <span style="color: white;">Portfolio admin</span>
+    <span class="toolbar-title">Portfolio admin</span>
     <span class="spacer"></span>
     <div [matMenuTriggerFor]="menu" class="profile-menu">
         <mat-icon>account_circle</mat-icon>
@@ -31,7 +31,7 @@
 <mat-drawer-container style="height: 91vh; background-color: white">
   <mat-drawer mode="side" #sidebar opened style="min-width: 15%;">
     <mat-nav-list>
-      <ng-container *ngIf="pageProperties.menuDetails?.length"><a [routerLink]="menu.routeLink" mat-list-item routerLinkActive="active-link" *ngFor="let menu of pageProperties.menuDetails" style="font-weight: 500;"><p routerLinkActive="text-change">{{menu.name}}</p></a></ng-container>
+      <ng-container *ngIf="pageProperties.menuDetails?.length"><a [routerLink]="menu.routeLink" mat-list-item class="menu-link" routerLinkActive="active-link" *ngFor="let menu of pageProperties.menuDetails" ><p routerLinkActive="text-change">{{menu.name}}</p></a></ng-container>
     </mat-nav-list>
   </mat-drawer>
   <div style="background-color: transparent;color:black !important;flex-grow: 1;">
