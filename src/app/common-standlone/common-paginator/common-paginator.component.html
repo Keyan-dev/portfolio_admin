@@ -1,0 +1,13 @@
+<div class="paginator-container">
+    <select [(ngModel)]="limit" (ngModelChange)="onLimitChange()">
+        @for(limit of limitArray;track limit){
+      <option [value]="limit">{{limit}}</option>
+    }
+    </select>
+    <button [disabled]="page === 1 || totalPages < 2" (click)="goToPage(1)">{{'<<'}}</button>
+    <button [disabled]="page === 1 || totalPages < 2" (click)="changePage(-1)">{{'<'}}</button>
+    <span class="pagination-text">Page&nbsp;{{page}}&nbsp;of&nbsp;{{totalPages}}</span>
+    <button [disabled]="totalPages < 2 || page >= totalPages" (click)="changePage(1)">{{'>'}}</button>
+    <button [disabled]="totalPages < 2 || page >= totalPages" (click)="goToPage(totalPages)">{{'>>'}}</button>
+  </div>
+  

@@ -8,6 +8,7 @@ import { TechnologyListComponent } from './technology-list/technology-list.compo
 import { TechnologyRoutingModule } from './technology-routing.module';
 import { CommonHeaderComponent } from '../common-standlone/common-header/common-header.component';
 import { CommonLoaderComponent } from '../common-standlone/common-loader/common-loader.component';
+import { CommonPaginatorComponent } from '../common-standlone/common-paginator/common-paginator.component';
 
 @NgModule({ declarations: [
         TechnologyListComponent
@@ -17,6 +18,6 @@ import { CommonLoaderComponent } from '../common-standlone/common-loader/common-
         FlexLayoutModule,
         ReactiveFormsModule,
         CommonHeaderComponent,
-        CommonLoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        CommonLoaderComponent,CommonPaginatorComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class TechnologyModule { }
 

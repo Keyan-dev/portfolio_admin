@@ -14,13 +14,14 @@ import { TechnologyService } from '../services/technology.service';
 })
 export class TechnologyListComponent implements OnInit {
   isLoading = false;
-  displayedColumns: String[] = ['index', 'name', 'colorCode', 'preview', 'Actions'];
-  listDataSource: any;
   technologyGroupForm!: FormGroup;
   isEdit: boolean = false;
   editDetails: any = {};
-  userId = '665db6f0aff325435c95713e';
   technologyData:any;
+  paginationData:{
+    limit:number,
+    page:number,
+  }={limit:10,page:1}
   TechnologyGroupHeader: headerModel = {
     heading: 'Technology',
     subHeading: 'Yours Technologies will displayed here',
@@ -30,24 +31,24 @@ export class TechnologyListComponent implements OnInit {
   }
   @ViewChild('addtechnologyGroupTemplate', { static: true }) addtechnologyGroupTemplate!: TemplateRef<any>;
   constructor(
-    private http: HttpClient, private _snackBar: MatSnackBar,
+    private http: HttpClient, 
+    private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private technologyService: TechnologyService,
   ) {
     this.technologyGroupForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       colorCode: new FormControl("#000000"),
-    })
+      textColor:new FormControl('#ffffff')
+    });
   }
   ngOnInit(): void {
     this.gettechnologyGroups();
   }
   gettechnologyGroups() {
     this.isLoading = true;
-    this.technologyService.getAllTechnologies({ params: {}, queryParams: {} }).subscribe((data: any) => {
-      console.log(data);
+    this.technologyService.getAllTechnologies({ params: {}, queryParams: {...this.paginationData} }).subscribe((data: any) => {
       this.technologyData=data;
-      this.listDataSource = new MatTableDataSource(this.processData(data));
       this.isLoading = false;
     }, (err: Error) => {
       this.isLoading = false;
@@ -84,15 +85,11 @@ export class TechnologyListComponent implements OnInit {
       this.closeDialog();
     }
   }
-  processData(data: any) {
-    data = data.map((e: any, index: number) => { return { _id: e._id, index: index + 1, name: e.name ?? 'N/A', colorCode: e.colorCode ?? 'N/A' } })
-    return data;
-  }
   edittechnologyGroup(data: any) {
     this.editDetails = data;
     this.technologyGroupForm.get('name')?.setValue(data?.name);
     this.technologyGroupForm.get('colorCode')?.setValue(data?.colorCode);
-    this.technologyGroupForm.get('imageUrl')?.setValue(data?.imageUrl);
+    this.technologyGroupForm.get('textColor')?.setValue(data?.textColor);
     this.isEdit = true;
     this.addtechnologyGroups();
   }
@@ -116,4 +113,10 @@ export class TechnologyListComponent implements OnInit {
     console.log("Event...emitted...", event);
     (this as any)[event]();
   };
+  paginatorChanges(event:any):void{
+    const data=event;
+    this.paginationData.limit=data?.limit;
+    this.paginationData.page=data?.page;
+    this.gettechnologyGroups();
+  }
 }

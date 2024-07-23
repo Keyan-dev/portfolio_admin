@@ -43,13 +43,30 @@
       <button (click)="edittechnologyGroup(techData)" class="icon-button"><mat-icon>edit</mat-icon></button>
       <button (click)="deletetechnologyGroup(techData._id)" class="icon-button"><mat-icon class="delete_icon">delete</mat-icon></button>
     </div>
-
     </div>
-    <div class="row-content"><p>Hex color code:&nbsp;</p><p>{{techData.colorCode}}</p></div>
-    <div class="row-content"><p>Preview:&nbsp;</p><div [style.background]="techData.colorCode" role="listitem" class="chip"><span style="color:white;font-size:13px">{{ techData.name }}</span></div></div>
+    <table class="list-table">
+      <tr>
+        <td>Hex color code</td>
+        <td>:</td>
+        <td>{{techData.colorCode}}</td>
+      </tr>
+      <tr>
+        <td>Text color</td>
+        <td>:</td>
+        <td>{{techData?.textColor?techData?.textColor:'#fffff'}}</td>
+      </tr>
+      <tr>
+        <td>Preview</td>
+        <td>:</td>
+        <td><div [style.background]="techData.colorCode" role="listitem" class="chip"><span style="color:white;font-size:13px" [style.color]="techData.textColor">{{ techData.name }}</span></div></td>
+      </tr>
+    </table>
+    <!-- <div class="row-content"><p>Hex color code:&nbsp;</p><p>{{techData.colorCode}}</p></div>
+    <div class="row-content"><p>Preview:&nbsp;</p><div [style.background]="techData.colorCode" role="listitem" class="chip"><span style="color:white;font-size:13px">{{ techData.name }}</span></div></div> -->
     </div>
   }
   </div>
+  <app-common-paginator [limit]="paginationData.limit" [limitArray]="[5,10]" [total]="100" (currentPage)="paginatorChanges($event)"></app-common-paginator>
 </div>
 <ng-template #addtechnologyGroupTemplate>
   <form [formGroup]="technologyGroupForm">
@@ -74,6 +91,10 @@
       <mat-form-field appearance="outline" style="width: 100%">
         <mat-label>Color Code</mat-label>
         <input matInput type="color" formControlName="colorCode"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Text color</mat-label>
+        <input matInput type="color" formControlName="textColor"/>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center">

@@ -57,3 +57,15 @@
     border-bottom: 1px solid #cccccc;
     margin-bottom: 3%;
 }
+.list-table{
+    td{
+        padding: 5px;
+    }
+}
+.search-container{
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+}
