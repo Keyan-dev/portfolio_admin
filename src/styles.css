@@ -1,26 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;overflow: hidden; }
-body { margin: 0; font-family: 'Nunito', sans-serif;}
-:root{
-    --primary-color:#1abc9c;
-    --secondary-color: #424242;
-    --warn-color:rgb(197, 0, 0);
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
-.container{
-    padding: 2%;
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
 }
-.delete_icon{
-    color: var(--warn-color);
+
+:root {
+  --primary-color: #1abc9c;
+  --secondary-color: #424242;
+  --warn-color: rgb(197, 0, 0);
 }
-.primary-button{
-    background-color: #1abc9c !important;
-    color: white !important;
+
+.container {
+  padding: 2%;
 }
-.secondary-button{
-    border-color: 1px solid var(--secondary-color) !important;
-    color:var(--secondary-color) !important;
+
+.delete_icon {
+  color: var(--warn-color);
 }
+
+.primary-button {
+  background-color: #1abc9c !important;
+  color: white !important;
+}
+
+.secondary-button {
+  border-color: 1px solid var(--secondary-color) !important;
+  color: var(--secondary-color) !important;
+}
+
 ::ng-deep .mat-mdc-text-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: transparent !important;
 }

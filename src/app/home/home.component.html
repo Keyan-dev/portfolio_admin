@@ -5,15 +5,16 @@
     </button>
     <span style="color: white;">Portfolio admin</span>
     <span class="spacer"></span>
-    <button mat-icon-button aria-label="logout-icon" style="color: white;" (click)="navigateSignIn()">
+    <button (click)="navigateSignIn()" aria-label="logout-icon" mat-icon-button style="color: white;">
       <mat-icon>power_settings_new</mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-drawer-container style="height: 91vh; background-color: white">
-  <mat-drawer mode="side" #sidebar opened style="min-width: 15%;">
+  <mat-drawer #sidebar mode="side" opened style="min-width: 15%;">
     <mat-nav-list>
-      <a [routerLink]="menu.routeLink" mat-list-item *ngFor="let menu of menuDetails" style="font-weight: 500;">{{menu.name}}</a>
+      <a *ngFor="let menu of menuDetails" [routerLink]="menu.routeLink" mat-list-item
+         style="font-weight: 500;">{{ menu.name }}</a>
     </mat-nav-list>
   </mat-drawer>
   <div style="background-color: transparent;color:black !important;flex-grow: 1;">

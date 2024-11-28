@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { SkillsComponent } from './skills/skills.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {SkillsComponent} from './skills/skills.component';
 
 const routes: Routes = [
-  { path: '', component: SkillsComponent }
+  {path: '', component: SkillsComponent}
 ]
+
 @NgModule({
   declarations: [],
   imports: [
@@ -16,4 +17,5 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class SkillsRoutingModule { }
+export class SkillsRoutingModule {
+}

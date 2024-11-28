@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HeroListComponent } from './hero-list/hero-list.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HeroListComponent} from './hero-list/hero-list.component';
+
 const routes: Routes = [{
   path: '', component: HeroListComponent
 }]
+
 @NgModule({
   declarations: [],
   imports: [
@@ -13,4 +15,5 @@ const routes: Routes = [{
     RouterModule
   ]
 })
-export class HeroRoutingModule { }
+export class HeroRoutingModule {
+}
