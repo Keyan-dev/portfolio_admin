@@ -1,0 +1,85 @@
+<div class="px-3 py-3 flex flex-col bg-slate-100 h-full m-3 rounded-lg">
+  <div class="flex justify-between align-middle">
+    <p class="text-md font-medium flex align-middle justify-center">Add Code Lab&nbsp;<mat-icon>terminal</mat-icon></p>
+    <button mat-button><mat-icon>remove_red_eye</mat-icon>Show code lab</button>
+  </div>
+  <form [formGroup]="codeLabForm">
+  <div class="grid grid-cols-1 gap-2 py-3 md:grid-cols-2 lg:grid-cols-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Code Lab Name</mat-label>
+        <input matInput placeholder="Enter code lab name" formControlName="codeLabName">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image url</mat-label>
+        <input matInput placeholder="Enter image url" formControlName="imageUrl">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Live url</mat-label>
+        <input matInput placeholder="Enter image url" formControlName="liveUrl">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Enter Description" formControlName="description">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select User</mat-label>
+        <mat-select formControlName="userId">
+          @for (user of users();track user.id){
+            <mat-option [value]="user.id">{{user.email}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+  </div>    </form>
+  <div class="flex justify-center md:justify-end"><button mat-raised-button class="primary-button" (click)="addCodeLab()"><mat-icon>add</mat-icon>Code lab</button></div>
+</div>
+<div class="px-3 py-3 flex flex-col bg-slate-100 h-full m-3 rounded-lg">
+  <div class="flex justify-between align-middle h-full">
+    <p class="text-md font-medium flex">List code labs&nbsp;<mat-icon>terminal</mat-icon></p>
+    <mat-form-field appearance="outline">
+      <mat-label>Select User</mat-label>
+      <mat-select (selectionChange)="getuserCodeLab()" [(ngModel)]="userId">
+        @for (user of users();track user.id){
+        <mat-option [value]="user.id">{{user.email}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  @if(codeLabs()?.length==0){
+    <div class="flex px-3 py-3 items-center justify-center">
+        <p class="text-xl">No code labs is available for current user.Add to see the here</p>
+    </div>
+  } @else {
+    <div class="px-3 py-3 grid grid-cols-1 gap-2 md:grid-cols-6">
+      @for (codeLab of codeLabs(); track codeLab.id) {
+        <div class="bg-slate-200 rounded-lg px-3 py-3 flex flex-col gap-3 items-center justify-between">
+          @if(codeLab?.imageUrl){
+            <img [src]="codeLab?.imageUrl" alt="" width="100%" height="150px" class="rounded-lg h-32">
+          }
+          @else{
+            <img src="https://static.vecteezy.com/system/resources/previews/027/390/993/original/flat-design-of-no-user-found-vector.jpg" alt="">
+          }
+          <div class="flex flex-col w-full gap-2">
+            <div class="flex justify-between">
+              <p class="flex items-center text-md font-medium">{{ codeLab?.name }}</p>
+            </div>
+            <div><p class="font-light text-xs">{{ codeLab?.description }}</p></div>
+            <div class="flex items-center justify-end text-blue-400">
+              <button mat-icon-button><a [href]="codeLab?.liveUrl" target="_blank"><mat-icon class="text-blue-900">link</mat-icon></a></button>
+                <button mat-icon-button><mat-icon class="text-blue-900">edit</mat-icon></button>
+                <button mat-icon-button><mat-icon class="text-red-900">delete</mat-icon></button>
+            </div>
+          </div>
+        </div>
+
+      }
+    </div>
+  }
+
+</div>
+
+<!--name: { type: String, required: true },-->
+<!--imageUrl: { type: String, required: true },-->
+<!--technologyUsed: { type: [String], required: true },-->
+<!--liveUrl: { type: String, required: true },-->
+<!--description:{type:String,required:true},-->
+<!--userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }-->
