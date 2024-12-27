@@ -1,8 +1,22 @@
 
-<main>
-    <div class="bg-gradient-to-r from-blue-50 to-blue-500 py-3">
-        <h2 class="text-xl font-light text-center">Portfolio Super admin</h2>
+<div>
+   <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <div class="px-3 py-3 lg:px-5 lg:pl-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center justify-start rtl:justify-end">
+            <div class="flex ms-2 md:me-24">
+              <span class="self-center text-md font-normal sm:text-md whitespace-nowrap dark:text-white">Portfolio Admin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="p-4">
+       <div class="p-1 mt-14">
+          <router-outlet/>
+       </div>
     </div>
-    <router-outlet />
-</main>
+</div>
 
+
+  

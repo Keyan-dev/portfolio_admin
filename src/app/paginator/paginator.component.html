@@ -1,0 +1,13 @@
+<div class="p-2 m-2 flex items-center justify-end gap-2">
+    <select [(ngModel)]="limit" (ngModelChange)="onLimitChange()" class="block text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        @for(limit of limitArray;track limit){
+      <option [value]="limit">{{limit}}</option>
+    }
+    </select>
+    <button [disabled]="page === 1 || totalPages < 2" (click)="goToPage(1)" class="btn-pagination">{{'<<'}}</button>
+    <button [disabled]="page === 1 || totalPages < 2" (click)="changePage(-1)" class="btn-pagination">{{'<'}}</button>
+    <span class="pagination-text">{{page}}&nbsp;of&nbsp;{{totalPages}}</span>
+    <button [disabled]="totalPages < 2 || page >= totalPages" (click)="changePage(1)" class="btn-pagination">{{'>'}}</button>
+    <button [disabled]="totalPages < 2 || page >= totalPages" (click)="goToPage(totalPages)" class="btn-pagination">{{'>>'}}</button>
+  </div>
+  
